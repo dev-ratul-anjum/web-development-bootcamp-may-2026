@@ -48,7 +48,7 @@ const ChatArea = ({ conversationId }: { conversationId: string }) => {
     queryKey: ["block-info", conversationParticipantId],
     queryFn: async () => {
       const res = await fetch(
-        `/api/proxy/user/v1/check-block/${conversationParticipantId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/v1/check-block/${conversationParticipantId}`,
         {
           credentials: "include",
         },

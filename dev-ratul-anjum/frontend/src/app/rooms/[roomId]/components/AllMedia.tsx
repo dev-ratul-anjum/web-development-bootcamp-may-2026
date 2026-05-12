@@ -13,7 +13,7 @@ const AllMedia = ({ conversationId, setActiveSidebarTab }: AllMediaProps) => {
       queryKey: ["all-media", conversationId],
       queryFn: async ({ pageParam }) => {
         const res = await fetch(
-          `/api/proxy/message/v1/all-media/${conversationId}?page=${pageParam}`, // Proxy path
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/message/v1/all-media/${conversationId}?page=${pageParam}`, // Proxy path
           {
             credentials: "include", // Still needed for proxy to get cookies
           },

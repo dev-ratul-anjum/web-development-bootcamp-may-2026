@@ -25,9 +25,9 @@ const UserRow = ({
         }
       }}
     >
-      {item.photo ? (
+      {item.image ? (
         <Image
-          src={item.photo}
+          src={item.image}
           alt="User"
           className="rounded-full object-cover"
           width={40}
@@ -83,7 +83,7 @@ type UserRowData = {
 
 type UserItem = {
   name: string;
-  photo: string | null;
+  image: string | null;
   id: string;
   hasConversation: boolean;
   conversationId: string | null;

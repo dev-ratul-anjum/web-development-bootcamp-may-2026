@@ -7,7 +7,7 @@ const addConversation = async (userId: string) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/conversation/v1/create`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/conversation/v1/create`,
       {
         method: "POST",
         credentials: "include",

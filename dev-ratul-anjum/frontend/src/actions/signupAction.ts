@@ -41,7 +41,7 @@ const signupAction = async (prevState: FormState, formData: FormData) => {
 
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/upload-avatar`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/v1/upload-avatar`,
         {
           method: "POST",
           body: backendForm,

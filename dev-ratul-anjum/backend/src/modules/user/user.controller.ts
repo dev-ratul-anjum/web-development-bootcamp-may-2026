@@ -142,6 +142,19 @@ const uploadUserAvatar = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+const getProfile = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.user?.id;
+
+  const data = await userService.getProfile(userId!);
+
+  return responseHandler(res, 200, {
+    success: true,
+    message: "Profile retrive successfull!",
+    data,
+  });
+});
+
 const userController = {
   getUsersForAddNewChat,
   updateUserProfile,
@@ -150,6 +163,7 @@ const userController = {
   checkBlockUser,
   reportUser,
   uploadUserAvatar,
+  getProfile
 };
 
 export default userController;

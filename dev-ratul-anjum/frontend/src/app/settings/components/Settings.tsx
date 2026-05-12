@@ -50,10 +50,10 @@ const Settings = () => {
       </div>
       <div className="flex-1 overflow-y-auto custom-scrollbar bg-white">
         <div className="flex items-center gap-4 px-4 py-3 hover:bg-[#f5f6f6] cursor-pointer">
-          {profile?.photo ? (
+          {profile?.image ? (
             <div className="relative h-12 w-12 cursor-pointer overflow-hidden rounded-full">
               <Image
-                src={profile.photo}
+                src={profile.image}
                 alt="My Profile"
                 className="h-full w-full object-cover"
                 width={100}

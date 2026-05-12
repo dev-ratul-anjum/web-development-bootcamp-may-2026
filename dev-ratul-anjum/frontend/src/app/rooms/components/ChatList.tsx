@@ -36,9 +36,9 @@ const ChatList = () => {
     queryKey: ["conversations", debouncedSearch],
     queryFn: async ({ pageParam }) => {
       const res = await fetch(
-        `/api/proxy/conversation/v1/all?page=${pageParam}&query=${debouncedSearch}`, // Proxy path
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/conversation/v1/all?page=${pageParam}&query=${debouncedSearch}`,
         {
-          credentials: "include", // Still needed for proxy to get cookies
+          credentials: "include",
         },
       );
       return res.json();

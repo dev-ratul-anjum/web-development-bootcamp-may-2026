@@ -36,7 +36,10 @@ const NewChatForm = () => {
     queryKey: ["contacts", debouncedSearch],
     queryFn: async ({ pageParam }) => {
       const res = await fetch(
-        `/api/proxy/user/v1/chats/available-users?query=${query}&page=${pageParam}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/v1/chats/available-users?query=${query}&page=${pageParam}`,
+        {
+          credentials: "include",
+        },
       );
       return res.json();
     },
@@ -53,9 +56,10 @@ const NewChatForm = () => {
     gcTime: 5 * 60_000,
   });
 
-  const items = data?.pages.flatMap((page) => page.data.users) || [];
+  const items = data?.pages.flatMap((page) => page?.data?.users) || [];
   const totalRow = items.length;
 
+  console.log("data : ", data);
   const onRowsRender = ({
     startIndex,
     stopIndex,

@@ -9,7 +9,7 @@ const blockUser = async (blockedId: string) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/block/${blockedId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/v1/block/${blockedId}`,
 
       {
         method: "POST",

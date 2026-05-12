@@ -17,7 +17,7 @@ const updateProfile = async (profileInfo: {
   const cookieHeader = await getDecodedCookies();
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/update-profile`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/v1/update-profile`,
       {
         method: "PATCH",
         credentials: "include",

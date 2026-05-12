@@ -1,5 +1,4 @@
 import { authClient } from "@/lib/auth-client";
-import { forwardCookie } from "@/lib/cookies";
 import { signinSchema } from "@/schema/signinSchema";
 import { redirect } from "next/navigation";
 

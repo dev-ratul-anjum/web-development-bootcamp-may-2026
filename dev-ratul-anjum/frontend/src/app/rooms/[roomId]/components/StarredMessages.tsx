@@ -16,9 +16,9 @@ const StarredMessages = ({
       queryKey: ["starred-messages", conversationId],
       queryFn: async ({ pageParam }) => {
         const res = await fetch(
-          `/api/proxy/message/v1/starred-messages/${conversationId}?page=${pageParam}`, // Proxy path
+          `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/message/v1/starred-messages/${conversationId}?page=${pageParam}`,
           {
-            credentials: "include", // Still needed for proxy to get cookies
+            credentials: "include",
           },
         );
         return res.json();

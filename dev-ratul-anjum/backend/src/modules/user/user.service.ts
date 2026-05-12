@@ -184,6 +184,22 @@ const reportUser = async (reporterId: string, reportedUserId: string) => {
   });
 };
 
+const getProfile = async (currentUserId: string) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      id: currentUserId,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      bio: true,
+      image: true,
+    },
+  });
+  return user;
+};
+
 const userService = {
   getUsersForAddNewChat,
   updateUserProfile,
@@ -191,6 +207,7 @@ const userService = {
   unblockUser,
   checkBlockUser,
   reportUser,
+  getProfile,
 };
 
 export default userService;

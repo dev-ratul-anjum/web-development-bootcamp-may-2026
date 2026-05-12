@@ -55,13 +55,13 @@ const NavigationRail = () => {
           <Settings className="h-6 w-6" />
         </Link>
 
-        {profile?.photo ? (
+        {profile?.image ? (
           <Link
             href="/profile"
             className="relative h-8 w-8 cursor-pointer overflow-hidden rounded-full"
           >
             <Image
-              src={profile.photo}
+              src={profile.image}
               alt="My Profile"
               className="h-full w-full object-cover"
               width={100}

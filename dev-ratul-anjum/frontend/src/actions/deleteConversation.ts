@@ -9,7 +9,7 @@ const deleteConversation = async (conversationId: string) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/conversation/v1/delete/${conversationId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/conversation/v1/delete/${conversationId}`,
 
       {
         method: "DELETE",

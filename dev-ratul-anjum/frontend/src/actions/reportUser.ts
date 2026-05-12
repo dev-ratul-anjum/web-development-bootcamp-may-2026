@@ -9,7 +9,7 @@ const reportUser = async (reportedUserId: string) => {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/v1/report/${reportedUserId}`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/user/v1/report/${reportedUserId}`,
 
       {
         method: "POST",

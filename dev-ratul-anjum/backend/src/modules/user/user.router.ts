@@ -18,6 +18,13 @@ userRouter.post(
   userController.uploadUserAvatar,
 );
 
+// Get user profile 
+userRouter.get(
+  "/v1/profile",
+  checkAuth,
+  userController.getProfile,
+);
+
 userRouter.get(
   "/v1/chats/available-users",
   checkAuth,

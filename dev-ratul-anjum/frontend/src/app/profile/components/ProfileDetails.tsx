@@ -137,9 +137,9 @@ const ProfileDetails = () => {
                   height={200}
                   width={200}
                 />
-              ) : profile?.photo ? (
+              ) : profile?.image ? (
                 <Image
-                  src={profile.photo}
+                  src={profile.image}
                   alt="Profile"
                   className="rounded-full h-50 w-50 object-cover"
                   height={200}

@@ -5,7 +5,7 @@ const useConversationMessages = (conversationId: string) => {
     queryKey: ["conversation-messages", conversationId],
     queryFn: async ({ pageParam = 1 }) => {
       const res = await fetch(
-        `/api/proxy/message/v1/get/${conversationId}?page=${pageParam}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/message/v1/get/${conversationId}?page=${pageParam}`,
         { credentials: "include" },
       );
       const data = await res.json();

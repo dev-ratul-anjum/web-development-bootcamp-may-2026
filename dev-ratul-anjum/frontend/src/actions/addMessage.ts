@@ -22,7 +22,7 @@ const addMessage = async (
   const cookieHeader = await getDecodedCookies();
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/message/v1/create`,
+      `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/message/v1/create`,
       {
         method: "POST",
         credentials: "include",

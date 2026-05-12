@@ -7,6 +7,17 @@ import checkAuth from "$/middlewares/checkAuth.js";
 
 const userRouter = express.Router();
 
+// Upload user avatar
+userRouter.post(
+  "/v1/upload-avatar",
+  uploader(
+    ["image/png", "image/jpeg", "image/jpg"],
+    100 * 1024,
+    "Only JPG, JPEG, and PNG image files are allowed.",
+  ).single("photo"),
+  userController.uploadUserAvatar,
+);
+
 userRouter.get(
   "/v1/chats/available-users",
   checkAuth,

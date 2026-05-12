@@ -121,6 +121,27 @@ const reportUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const uploadUserAvatar = catchAsync(async (req: Request, res: Response) => {
+  let photo: undefined | string = undefined;
+
+  if (req.file) {
+    const result = await uploadToCloudinary(req.file);
+    photo = result.secure_url;
+  }
+
+  if (!photo) {
+    throw new ApiError(400, "Photo is required for upload");
+  }
+
+  return responseHandler(res, 200, {
+    success: true,
+    message: "Photo uploaded successfull!",
+    data: {
+      imageUrl: photo,
+    },
+  });
+});
+
 const userController = {
   getUsersForAddNewChat,
   updateUserProfile,
@@ -128,6 +149,7 @@ const userController = {
   unblockUser,
   checkBlockUser,
   reportUser,
+  uploadUserAvatar,
 };
 
 export default userController;

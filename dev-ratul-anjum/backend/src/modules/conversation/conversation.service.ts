@@ -101,14 +101,14 @@ const getConversations = async (
         select: {
           id: true,
           name: true,
-          photo: true,
+          image: true,
         },
       },
       participant: {
         select: {
           id: true,
           name: true,
-          photo: true,
+          image: true,
         },
       },
       messages: {
@@ -135,7 +135,7 @@ const getConversations = async (
     return {
       id: conv.id,
       participantName: otherUser.name,
-      participantPhoto: otherUser.photo,
+      participantPhoto: otherUser.image,
       lastMessage: lastMessage?.text ?? null,
       lastMessageAt: lastMessage?.updatedAt
         ? getRelativeTime(lastMessage.updatedAt)
@@ -176,7 +176,7 @@ const getConversationInfo = async (
         select: {
           id: true,
           name: true,
-          photo: true,
+          image: true,
           email: true,
           bio: true,
         },
@@ -185,7 +185,7 @@ const getConversationInfo = async (
         select: {
           id: true,
           name: true,
-          photo: true,
+          image: true,
           email: true,
           bio: true,
         },
@@ -220,7 +220,7 @@ const getConversationInfo = async (
     totalAttachments,
     participantId: otherUser.id,
     participantName: otherUser.name,
-    participantPhoto: otherUser.photo,
+    participantPhoto: otherUser.image,
     participantEmail: otherUser.email,
     participantBio: otherUser.bio,
   };

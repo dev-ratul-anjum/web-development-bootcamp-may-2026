@@ -45,7 +45,7 @@ const getUsersForAddNewChat = async (
     skip,
     select: {
       name: true,
-      photo: true,
+      image: true,
       id: true,
     },
   });
@@ -99,7 +99,7 @@ const updateUserProfile = async (
       },
       data: {
         ...data,
-        photo,
+        image: photo,
       },
     });
   }

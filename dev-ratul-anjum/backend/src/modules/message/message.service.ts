@@ -65,14 +65,14 @@ const getConversationMessages = async (
         select: {
           id: true,
           name: true,
-          photo: true,
+          image: true,
         },
       },
       participant: {
         select: {
           id: true,
           name: true,
-          photo: true,
+          image: true,
         },
       },
     },
@@ -122,7 +122,7 @@ const getConversationMessages = async (
   return {
     participantId: otherUser.id,
     participantName: otherUser.name,
-    participantPhoto: otherUser.photo,
+    participantPhoto: otherUser.image,
     messages: finalMessages,
     meta: {
       totalMessages: messagesCount,
@@ -170,7 +170,7 @@ const getConversationStarMessages = async (
         select: {
           id: true,
           name: true,
-          photo: true,
+          image: true,
         },
       },
       receiver: {

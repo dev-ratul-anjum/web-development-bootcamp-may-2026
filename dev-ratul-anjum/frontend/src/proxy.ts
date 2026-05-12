@@ -19,16 +19,20 @@ export const proxy = async (request: NextRequest) => {
     return NextResponse.next();
   }
 
-  const { data: session } = await authClient.getSession({
-    fetchOptions: {
-      headers: {
-        Cookie: cookieHeader,
+  try {
+    const { data: session } = await authClient.getSession({
+      fetchOptions: {
+        headers: {
+          Cookie: cookieHeader,
+        },
       },
-    },
-  });
+    });
 
-  if (session) {
-    isAuthenticated = true;
+    if (session) {
+      isAuthenticated = true;
+    }
+  } catch (error) {
+    console.error(error);
   }
 
   // If logged in and trying to access auth pages

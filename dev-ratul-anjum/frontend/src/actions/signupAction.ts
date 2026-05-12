@@ -69,7 +69,7 @@ const signupAction = async (prevState: FormState, formData: FormData) => {
       name: parsed.data.name, // required
       email: parsed.data.email, // required
       password: parsed.data.password, // required
-      image,
+      image: image ? image : undefined,
       callbackURL: "/rooms",
     });
 

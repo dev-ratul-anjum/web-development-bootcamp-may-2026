@@ -1,7 +1,8 @@
 "use client";
-import logoutUser from "@/actions/logoutUser";
+
 import ConfirmationModal from "@/components/ConfirmationModal";
 import useProfileDetails from "@/hooks/useProfileDetails";
+import { authClient } from "@/lib/auth-client";
 import {
   Bell,
   HelpCircle,
@@ -18,24 +19,19 @@ import {
 import Image from "next/image";
 import { redirect } from "next/navigation";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 const Settings = () => {
   const { data: profile, isLoading } = useProfileDetails();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
   const handleLogout = async () => {
-    const res = await logoutUser();
-
-    if (res?.success) {
-      redirect("/login");
-    } else {
-      toast.error(res?.message, {
-        className:
-          "bg-[#C53030] text-white rounded-md shadow-md px-4 py-2 text-sm",
-        progressClassName: "bg-white/50",
-      });
-    }
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          redirect("/login"); // redirect to login page
+        },
+      },
+    });
   };
   return (
     <div className="flex flex-col h-full bg-[#f0f2f5] animate-in slide-in-from-left duration-200">

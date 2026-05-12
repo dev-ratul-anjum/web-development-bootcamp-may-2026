@@ -1,5 +1,4 @@
-"use server";
-
+import { authClient } from "@/lib/auth-client";
 import { forwardCookie } from "@/lib/cookies";
 import { signinSchema } from "@/schema/signinSchema";
 import { redirect } from "next/navigation";
@@ -30,42 +29,15 @@ const signinAction = async (prevState: FormState, formData: FormData) => {
 
   //   Send to backend
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/v1/login`,
-      {
-        method: "POST",
-        credentials: "include",
-        body: JSON.stringify({
-          ...parsed.data,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      },
-    );
+    const { data, error } = await authClient.signIn.email({
+      email: parsed.data.email, // required
+      password: parsed.data.password, // required
+      rememberMe: true,
+      callbackURL: "/rooms",
+    });
 
-    // Forward backend Set-Cookie to browser
-    const setCookieHeader = response.headers.get("set-cookie");
-
-    if (setCookieHeader) {
-      await forwardCookie(setCookieHeader);
-    }
-
-    const result = await response.json();
-
-    if (!result.success) {
-      const errors: FormState["errors"] = {};
-
-      if (result?.errors?.length > 0) {
-        result.errors?.forEach((error: { path: string; message: string }) => {
-          const field = error.path as keyof FormState["errors"];
-          errors[field] = error.message;
-        });
-      } else {
-        errors.general = result?.message;
-      }
-
-      return { values, errors };
+    if (!data && error) {
+      return { values, errors: { general: error.message } };
     }
   } catch (error) {
     const errors: FormState["errors"] = {

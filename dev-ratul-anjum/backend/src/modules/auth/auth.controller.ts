@@ -7,7 +7,7 @@ import {
   createJwtToken,
   setAuthCookie,
 } from "$/utils/authHelpers.js";
-import { prisma } from "$/prisma/prisma.js";
+import { prisma } from "$/prisma/index.js";
 
 const loginUser = catchAsync(async (req: Request, res: Response) => {
   const user = await authService.loginUser(req.body);

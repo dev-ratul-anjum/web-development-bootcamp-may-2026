@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { ApiError } from "./errorHandler.js";
 import { env } from "$/utils/env.js";
-import { prisma } from "$/prisma/prisma.js";
+import { prisma } from "$/prisma/index.js";
 
 interface AuthPayload extends JwtPayload {
   userId: string;

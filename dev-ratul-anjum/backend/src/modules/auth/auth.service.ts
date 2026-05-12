@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import { ApiError } from "$/middlewares/errorHandler.js";
-import { prisma } from "$/prisma/prisma.js";
+import { prisma } from "$/prisma/index.js";
 import { TLoginUserSchema } from "./auth.schema.js";
 
 const loginUser = async (data: TLoginUserSchema) => {

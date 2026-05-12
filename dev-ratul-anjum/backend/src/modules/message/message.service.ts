@@ -1,6 +1,6 @@
 import { ApiError } from "$/middlewares/errorHandler.js";
 import { Prisma } from "$/prisma/generated/client.js";
-import { prisma } from "$/prisma/prisma.js";
+import { prisma } from "$/prisma/index.js";
 import isBlocked from "$/services/block.service.js";
 import { formatContextualDateTime } from "$/utils/dateFormatter.js";
 import { TCreateMessageSchema } from "./message.schema.js";

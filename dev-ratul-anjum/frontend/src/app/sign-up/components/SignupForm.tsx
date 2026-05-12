@@ -34,7 +34,7 @@ const SignupForm = () => {
   const photoRef = useRef<HTMLInputElement>(null);
   const [fileError, setFileError] = useState<string | null>(null);
 
-  const handleFormSubmit = (formData: FormData) => {
+  const handleFormSubmit = async (formData: FormData) => {
     if (photo) {
       formData.set("photo", photo);
     }

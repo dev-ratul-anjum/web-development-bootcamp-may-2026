@@ -1,4 +1,4 @@
-import { prisma } from "$/prisma/prisma.js";
+import { prisma } from "$/prisma/index.js";
 import { TCreateConversationSchema } from "./conversation.schema.js";
 import { Prisma } from "$/prisma/generated/client.js";
 import { getRelativeTime } from "$/utils/dateFormatter.js";

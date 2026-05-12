@@ -1,4 +1,4 @@
-import { prisma } from "$/prisma/prisma.js";
+import { prisma } from "$/prisma/index.js";
 
 const isBlocked = async (userA: string, userB: string) => {
   const block = await prisma.userBlock.findFirst({

@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDecodedCookies } from "./lib/cookies";
+import { authClient } from "./lib/auth-client";
 
 const protectedRoutes = ["/rooms", "/profile", "/settings", "/add-chat"];
 
 export const proxy = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-
   const isAuthPage = pathname === "/login" || pathname === "/sign-up";
+  let isAuthenticated = false;
+  const cookieHeader = await getDecodedCookies(); // Decode for signed cookie
 
   // Skip non-protected and non-auth routes
   if (
@@ -17,30 +19,26 @@ export const proxy = async (request: NextRequest) => {
     return NextResponse.next();
   }
 
-  const cookieHeader = await getDecodedCookies(); // Decode for signed cookie
-
-  let result = { success: false };
-
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/v1/me`,
-      {
-        headers: { Cookie: cookieHeader },
+  const { data: session } = await authClient.getSession({
+    fetchOptions: {
+      headers: {
+        Cookie: cookieHeader,
       },
-    );
-    result = await response.json();
-  } catch (error) {
-    console.error("Auth check failed:", error);
+    },
+  });
+
+  if (session) {
+    isAuthenticated = true;
   }
 
   // If logged in and trying to access auth pages
-  if (result.success && isAuthPage) {
+  if (isAuthenticated && isAuthPage) {
     return NextResponse.redirect(new URL("/rooms", request.url));
   }
 
   // If not logged in and trying to access protected pages
   if (
-    !result.success &&
+    !isAuthenticated &&
     (protectedRoutes.includes(pathname) || pathname.startsWith("/rooms/"))
   ) {
     return NextResponse.redirect(new URL("/login", request.url));

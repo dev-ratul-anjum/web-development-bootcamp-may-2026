@@ -1,7 +1,21 @@
+"use client";
+import { authClient } from "@/lib/auth-client";
 import { Github, Twitter } from "lucide-react";
-import Link from "next/link";
 
 const SocialAuth = () => {
+  const handleSocialSignIn = async (
+    provider: "google" | "github" | "twitter" | "discord",
+  ) => {
+    try {
+      await authClient.signIn.social({
+        provider,
+        callbackURL:
+          process.env.NEXT_PUBLIC_FRONTEND_OAUTH_SUCCESS_REDIRECT_URL,
+      });
+    } catch (error) {
+      console.error(`${provider} sign in error:`, error);
+    }
+  };
   return (
     <>
       {/* Divider */}
@@ -16,9 +30,9 @@ const SocialAuth = () => {
 
       {/* Social Auth */}
       <div className="grid grid-cols-3 gap-3">
-        <Link
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/v1/google`}
-          className="flex items-center justify-center py-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
+        <button
+          onClick={() => handleSocialSignIn("google")}
+          className="flex items-center justify-center py-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
         >
           <svg className="h-5 w-5" viewBox="0 0 24 24">
             <path
@@ -38,19 +52,19 @@ const SocialAuth = () => {
               fill="#EA4335"
             />
           </svg>
-        </Link>
-        <Link
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/v1/github`}
-          className="flex items-center justify-center py-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
+        </button>
+        <button
+          onClick={() => handleSocialSignIn("github")}
+          className="flex items-center justify-center py-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
         >
           <Github className="h-5 w-5 text-[#1877F2]" fill="currentColor" />
-        </Link>
-        <Link
-          href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/v1/twitter`}
-          className="flex items-center justify-center py-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors"
+        </button>
+        <button
+          onClick={() => handleSocialSignIn("twitter")}
+          className="flex items-center justify-center py-2 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors cursor-pointer"
         >
           <Twitter className="h-5 w-5 text-[#1DA1F2]" fill="currentColor" />
-        </Link>
+        </button>
       </div>
     </>
   );

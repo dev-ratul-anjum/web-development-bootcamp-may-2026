@@ -15,14 +15,12 @@ const envSchema = z.object({
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
   GOOGLE_CALLBACK_URL: z.string(),
-  TWITTER_CONSUMER_KEY: z.string(),
-  TWITTER_CONSUMER_SECRET: z.string(),
+  TWITTER_CLIENT_ID: z.string(),
+  TWITTER_CLIENT_SECRET: z.string(),
   TWITTER_CALLBACK_URL: z.string(),
-  FRONTEND_OAUTH_SUCCESS_REDIRECT_URL: z.string(),
-  FRONTEND_LOGIN_URL: z.string(),
-  SESSION_SECRET: z.string(),
   GITHUB_CLIENT_ID: z.string(),
   GITHUB_CLIENT_SECRET: z.string(),
+  GITHUB_CALLBACK_URL: z.string(),
 });
 
 const result = envSchema.safeParse(process.env);

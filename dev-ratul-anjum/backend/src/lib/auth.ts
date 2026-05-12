@@ -12,9 +12,23 @@ export const auth = betterAuth({
     enabled: true,
   },
   socialProviders: {
+    google: {
+      prompt: "select_account",
+      clientId: env.GOOGLE_CLIENT_ID,
+      clientSecret: env.GOOGLE_CLIENT_SECRET,
+      redirectURI: env.GOOGLE_CALLBACK_URL,
+    },
     github: {
+      prompt: "select_account",
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
+      redirectURI: env.GITHUB_CALLBACK_URL,
+    },
+    twitter: {
+      prompt: "select_account",
+      clientId: env.TWITTER_CLIENT_ID,
+      clientSecret: env.TWITTER_CLIENT_SECRET,
+      redirectURI: env.TWITTER_CALLBACK_URL,
     },
   },
 });

@@ -1,10 +1,9 @@
-import { User as PrismaUser } from "$/prisma/generated/client.ts";
+import { User } from "$/prisma/generated/client.ts";
 
 declare global {
   namespace Express {
-    interface User extends Pick<
-      PrismaUser,
-      "id" | "name" | "email" | "googleId" | "twitterId" | "githubId"
-    > {}
+    interface Request {
+      user?: User.Pick<"id" | "name" | "email">;
+    }
   }
 }

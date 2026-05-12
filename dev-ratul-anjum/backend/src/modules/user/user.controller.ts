@@ -6,17 +6,6 @@ import { createJwtToken, setAuthCookie } from "$/utils/authHelpers.js";
 import { ApiError } from "$/middlewares/errorHandler.js";
 import { uploadToCloudinary } from "$/utils/fileUploader.js";
 
-const registerUser = catchAsync(async (req: Request, res: Response) => {
-  const newUser = await userService.registerUser(req.body, req.file);
-  const token = createJwtToken(newUser.id);
-  setAuthCookie(res, token);
-
-  return responseHandler(res, 201, {
-    success: true,
-    message: "User Registered Successfully!",
-  });
-});
-
 const getUsersForAddNewChat = catchAsync(
   async (req: Request, res: Response) => {
     let { query, page } = req.query;
@@ -133,7 +122,6 @@ const reportUser = catchAsync(async (req: Request, res: Response) => {
 });
 
 const userController = {
-  registerUser,
   getUsersForAddNewChat,
   updateUserProfile,
   blockUser,

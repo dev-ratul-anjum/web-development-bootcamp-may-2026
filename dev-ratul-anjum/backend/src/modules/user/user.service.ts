@@ -9,38 +9,6 @@ import {
 import { Prisma } from "$/prisma/generated/client.js";
 import isBlocked from "$/services/block.service.js";
 
-const registerUser = async (
-  data: TRegisterUserSchema,
-  file?: Express.Multer.File,
-) => {
-  const existingUser = await prisma.user.findUnique({
-    where: {
-      email: data.email,
-    },
-  });
-
-  if (existingUser) {
-    throw new ApiError(409, "This email is already registered.", "email");
-  }
-
-  let profilePhoto: null | string = null;
-  if (file) {
-    const result = await uploadToCloudinary(file);
-    profilePhoto = result.secure_url;
-  }
-
-  const hashedPassword = await bcrypt.hash(data.password, 10);
-
-  const newUser = await prisma.user.create({
-    data: {
-      ...data,
-      password: hashedPassword,
-      ...(profilePhoto ? { photo: profilePhoto } : {}),
-    },
-  });
-  return newUser;
-};
-
 const getUsersForAddNewChat = async (
   currentUserId: string,
   query: string,
@@ -217,7 +185,6 @@ const reportUser = async (reporterId: string, reportedUserId: string) => {
 };
 
 const userService = {
-  registerUser,
   getUsersForAddNewChat,
   updateUserProfile,
   blockUser,

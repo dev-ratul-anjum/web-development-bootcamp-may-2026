@@ -21,6 +21,8 @@ const envSchema = z.object({
   FRONTEND_OAUTH_SUCCESS_REDIRECT_URL: z.string(),
   FRONTEND_LOGIN_URL: z.string(),
   SESSION_SECRET: z.string(),
+  GITHUB_CLIENT_ID: z.string(),
+  GITHUB_CLIENT_SECRET: z.string(),
 });
 
 const result = envSchema.safeParse(process.env);

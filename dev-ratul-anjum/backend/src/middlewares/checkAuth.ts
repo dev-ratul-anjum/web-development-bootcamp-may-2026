@@ -1,51 +1,24 @@
 import { RequestHandler } from "express";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import { fromNodeHeaders } from "better-auth/node";
 import { ApiError } from "./errorHandler.js";
-import { env } from "$/utils/env.js";
-import { prisma } from "$/prisma/index.js";
-
-interface AuthPayload extends JwtPayload {
-  userId: string;
-}
+import { auth } from "$/lib/auth.js";
 
 const checkAuth: RequestHandler = async (req, res, next) => {
   try {
-    const token = req.signedCookies[env.ACCESS_TOKEN_NAME];
+    const session = await auth.api.getSession({
+      headers: fromNodeHeaders(req.headers),
+    });
 
-    if (!token) {
+    if (!session || !session.user) {
       throw new ApiError(401, "Please login to continue.");
     }
 
-    let decodedUser: AuthPayload;
-    try {
-      decodedUser = jwt.verify(token, env.JWT_SECRET) as AuthPayload;
-    } catch (error) {
-      throw new ApiError(
-        401,
-        "Your session is invalid or has expired. Please login again.",
-      );
-    }
+    req.user = {
+      id: session.user.id,
+      name: session.user.name,
+      email: session.user.email,
+    };
 
-    const user = await prisma.user.findUnique({
-      where: { id: decodedUser.userId },
-      select: {
-        id: true,
-        name: true,
-        email: true,
-        googleId: true,
-        twitterId: true,
-        githubId: true,
-      },
-    });
-
-    if (!user) {
-      throw new ApiError(
-        401,
-        "Your session is invalid or has expired. Please login again.",
-      );
-    }
-
-    req.user = user;
     next();
   } catch (error) {
     next(error);

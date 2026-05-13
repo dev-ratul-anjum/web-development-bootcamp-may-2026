@@ -29,6 +29,7 @@ const addConversation = async (userId: string) => {
       conversationId: result.data.conversationId,
     };
   } catch (error) {
+    console.log(error);
     let message: string;
     if (error instanceof Error) {
       message = "Failed to create conversation. Please try again later.";

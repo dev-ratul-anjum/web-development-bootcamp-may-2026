@@ -59,7 +59,6 @@ const NewChatForm = () => {
   const items = data?.pages.flatMap((page) => page?.data?.users) || [];
   const totalRow = items.length;
 
-  console.log("data : ", data);
   const onRowsRender = ({
     startIndex,
     stopIndex,

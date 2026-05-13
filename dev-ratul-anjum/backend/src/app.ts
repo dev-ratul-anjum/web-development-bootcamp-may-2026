@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 import {
   globalErrorHandler,
   notFoundHandler,
@@ -20,7 +19,6 @@ if (env.NODE_ENV === "production") {
 
 app.use(express.json());
 app.use(cors(corsOptions));
-app.use(cookieParser(env.COOKIE_SECRET));
 
 // auth route
 app.all("/api/auth/{*any}", toNodeHandler(auth));

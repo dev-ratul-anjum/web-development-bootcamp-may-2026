@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import catchAsync from "$/utils/catchAsync.js";
 import responseHandler from "$/utils/responseHandler.js";
 import userService from "./user.service.js";
-import { createJwtToken, setAuthCookie } from "$/utils/authHelpers.js";
 import { ApiError } from "$/middlewares/errorHandler.js";
 import { uploadToCloudinary } from "$/utils/fileUploader.js";
 
@@ -142,7 +141,6 @@ const uploadUserAvatar = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-
 const getProfile = catchAsync(async (req: Request, res: Response) => {
   const userId = req.user?.id;
 
@@ -163,7 +161,7 @@ const userController = {
   checkBlockUser,
   reportUser,
   uploadUserAvatar,
-  getProfile
+  getProfile,
 };
 
 export default userController;

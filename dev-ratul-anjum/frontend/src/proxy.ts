@@ -10,6 +10,8 @@ export const proxy = async (request: NextRequest) => {
   let isAuthenticated = false;
   const cookieHeader = await getDecodedCookies(); // Decode for signed cookie
 
+  console.log("CookieHeader : ", cookieHeader);
+
   // Skip non-protected and non-auth routes
   if (
     !isAuthPage &&
@@ -27,6 +29,8 @@ export const proxy = async (request: NextRequest) => {
         },
       },
     });
+
+    console.log("Session : ", session);
 
     if (session) {
       isAuthenticated = true;

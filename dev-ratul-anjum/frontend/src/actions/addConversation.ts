@@ -22,11 +22,12 @@ const addConversation = async (userId: string) => {
     );
 
     const result = await res.json();
+    console.log("result: ", result);
 
     return {
       success: result.success,
       message: result.message,
-      conversationId: result.data.conversationId,
+      conversationId: result?.data?.conversationId,
     };
   } catch (error) {
     console.log(error);

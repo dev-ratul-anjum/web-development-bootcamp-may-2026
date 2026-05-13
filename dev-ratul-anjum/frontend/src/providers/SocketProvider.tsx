@@ -16,7 +16,7 @@ const SocketProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!socketRef.current) {
-      socketRef.current = io(process.env.NEXT_PUBLIC_SOCKET_BACKEND_URL);
+      socketRef.current = io(process.env.NEXT_PUBLIC_BACKEND_BASE_URL);
 
       setSocket(socketRef.current);
     }

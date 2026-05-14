@@ -2,7 +2,6 @@ import "./globals.css";
 import { Ubuntu } from "next/font/google";
 import Providers from "@/providers";
 import GlobalToast from "@/components/GlobalToast";
-import { Suspense } from "react";
 
 const ubuntu = Ubuntu({
   subsets: ["latin"],
@@ -24,22 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={ubuntu.className}>
-        <Suspense fallback={<LoadingFallback />}>
-          <Providers>
-            {children}
-            <GlobalToast />
-          </Providers>
-        </Suspense>
+        <Providers>
+          {children}
+          <GlobalToast />
+        </Providers>
       </body>
     </html>
-  );
-}
-
-// Loading UI
-function LoadingFallback() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950">
-      <p className="text-white text-lg">Loading...</p>
-    </div>
   );
 }

@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getDecodedCookies } from "./lib/cookies";
 import { authClient } from "./lib/auth-client";
-import { getSessionCookie } from "better-auth/cookies";
 
 const protectedRoutes = ["/rooms", "/profile", "/settings", "/add-chat"];
 
@@ -9,53 +8,46 @@ export const proxy = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
   const isAuthPage = pathname === "/login" || pathname === "/sign-up";
   let isAuthenticated = false;
-  const cookieHeader = request.headers.get("cookie") || "";
-  const cookieHeader1 = await getDecodedCookies(); // Decode for signed cookie
 
-  console.log("CookieHeader : ", cookieHeader);
-  console.log("CookieHeader1 : ", cookieHeader1);
+  const cookieHeader = await getDecodedCookies();
 
-  // Better Auth এর session cookie পাওয়া
-  const sessionCookie = getSessionCookie(request);
+  // Skip non-protected and non-auth routes
+  if (
+    !isAuthPage &&
+    !protectedRoutes.includes(pathname) &&
+    !pathname.startsWith("/rooms/")
+  ) {
+    return NextResponse.next();
+  }
 
-  console.log("Session Cookie :", sessionCookie);
-  const isAuthenticatedAnother = !!sessionCookie;
+  try {
+    const { data: session } = await authClient.getSession({
+      fetchOptions: {
+        headers: {
+          Cookie: cookieHeader,
+        },
+      },
+    });
 
-  console.log("Session Cookie exists:", !!sessionCookie);
+    if (session) {
+      isAuthenticated = true;
+    }
+  } catch (error) {
+    console.error(error);
+  }
 
-  // // Skip non-protected and non-auth routes
-  // if (
-  //   !isAuthPage &&
-  //   !protectedRoutes.includes(pathname) &&
-  //   !pathname.startsWith("/rooms/")
-  // ) {
-  //   return NextResponse.next();
-  // }
+  // If logged in and trying to access auth pages
+  if (isAuthenticated && isAuthPage) {
+    return NextResponse.redirect(new URL("/rooms", request.url));
+  }
 
-  // try {
-  //   const { data: session } = await authClient.getSession();
-
-  //   console.log("Session : ", session);
-
-  //   if (session) {
-  //     isAuthenticated = true;
-  //   }
-  // } catch (error) {
-  //   console.error(error);
-  // }
-
-  // // If logged in and trying to access auth pages
-  // if (isAuthenticated && isAuthPage) {
-  //   return NextResponse.redirect(new URL("/rooms", request.url));
-  // }
-
-  // // If not logged in and trying to access protected pages
-  // if (
-  //   !isAuthenticated &&
-  //   (protectedRoutes.includes(pathname) || pathname.startsWith("/rooms/"))
-  // ) {
-  //   return NextResponse.redirect(new URL("/login", request.url));
-  // }
+  // If not logged in and trying to access protected pages
+  if (
+    !isAuthenticated &&
+    (protectedRoutes.includes(pathname) || pathname.startsWith("/rooms/"))
+  ) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
 
   return NextResponse.next();
 };

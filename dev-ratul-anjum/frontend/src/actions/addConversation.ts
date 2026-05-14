@@ -1,9 +1,9 @@
-// "use server";
+"use server";
 
 import { getDecodedCookies } from "@/lib/cookies";
 
 const addConversation = async (userId: string) => {
-  // const cookieHeader = await getDecodedCookies();
+  const cookieHeader = await getDecodedCookies();
 
   try {
     const res = await fetch(
@@ -15,14 +15,13 @@ const addConversation = async (userId: string) => {
           participantId: userId,
         }),
         headers: {
-          // Cookie: cookieHeader,
+          Cookie: cookieHeader,
           "Content-Type": "application/json",
         },
       },
     );
 
     const result = await res.json();
-    console.log("result: ", result);
 
     return {
       success: result.success,
@@ -30,7 +29,6 @@ const addConversation = async (userId: string) => {
       conversationId: result?.data?.conversationId,
     };
   } catch (error) {
-    console.log(error);
     let message: string;
     if (error instanceof Error) {
       message = "Failed to create conversation. Please try again later.";

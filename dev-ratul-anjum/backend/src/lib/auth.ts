@@ -10,16 +10,14 @@ export const auth = betterAuth({
   trustedOrigins: [`${env.BETTER_AUTH_URL}`],
   advanced: {
     useSecureCookies: env.NODE_ENV === "production",
-    cookies: {
-      sessionToken: {
-        name: "better-auth.session_token",  
-        attributes: {
-          httpOnly: true,
-          secure: env.NODE_ENV === "production",
-          sameSite: env.NODE_ENV === "production" ? "None" : "Lax",
-          path: "/",
+    crossSubDomainCookies: {
+            enabled: true,
+            domain: ".fabaka.com",
         },
-      },
+    defaultCookieAttributes: {
+      httpOnly: true,
+      secure: env.NODE_ENV === "production",
+      sameSite: env.NODE_ENV === "production" ? "None" : "Lax",
     },
   },
   emailAndPassword: {

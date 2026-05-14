@@ -10,9 +10,16 @@ export const auth = betterAuth({
   trustedOrigins: [`${env.BETTER_AUTH_URL}`],
   advanced: {
     useSecureCookies: env.NODE_ENV === "production",
-    defaultCookieAttributes: {
-      secure: env.NODE_ENV === "production",
-      sameSite: env.NODE_ENV === "production" ? "None" : "Lax",
+    cookies: {
+      sessionToken: {
+        name: "better-auth.session_token",  
+        attributes: {
+          httpOnly: true,
+          secure: env.NODE_ENV === "production",
+          sameSite: env.NODE_ENV === "production" ? "None" : "Lax",
+          path: "/",
+        },
+      },
     },
   },
   emailAndPassword: {

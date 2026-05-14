@@ -19,7 +19,7 @@ export const proxy = async (request: NextRequest) => {
   const sessionCookie = getSessionCookie(request);
   
   console.log("Session Cookie :", sessionCookie);
-  const isAuthenticated = !!sessionCookie;
+  const isAuthenticatedAnother = !!sessionCookie;
 
   console.log("Session Cookie exists:", !!sessionCookie);
 

@@ -71,12 +71,12 @@ const AllMedia = ({ conversationId, setActiveSidebarTab }: AllMediaProps) => {
             </button>
             <h1 className="text-xl font-medium text-gray-800">Media Gallery</h1>
           </div>
-          <button
+          {/* <button
             className="p-1 rounded-full hover:bg-gray-100 transition-colors"
             aria-label="Menu"
           >
             <MoreVertical className="w-6 h-6 text-gray-600" />
-          </button>
+          </button> */}
         </header>
 
         {/* Message List */}

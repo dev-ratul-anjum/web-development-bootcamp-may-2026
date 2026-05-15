@@ -83,7 +83,7 @@ const ChatActionsSidebar = ({
               </p>
 
               {/* Action Buttons */}
-              <div className="mt-6 flex w-full justify-center gap-4">
+              {/* <div className="mt-6 flex w-full justify-center gap-4">
                 <div className="group flex flex-col items-center gap-1 cursor-pointer">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#e9edef] text-[#00a884] shadow-sm group-hover:bg-gray-50">
                     <Phone className="h-5 w-5" />
@@ -108,7 +108,7 @@ const ChatActionsSidebar = ({
                     Search
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* About Section */}

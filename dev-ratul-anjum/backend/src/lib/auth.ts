@@ -11,9 +11,9 @@ export const auth = betterAuth({
   advanced: {
     useSecureCookies: env.NODE_ENV === "production",
     crossSubDomainCookies: {
-            enabled: true,
-            domain: ".fabaka.com",
-        },
+      enabled: true,
+      domain: ".fabaka.com",
+    },
     defaultCookieAttributes: {
       httpOnly: true,
       secure: env.NODE_ENV === "production",

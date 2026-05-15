@@ -64,24 +64,27 @@ const HomePage = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
-              <a
-                href="#"
+              <Link
+                href="/features"
+                prefetch={true}
                 className="text-gray-500 hover:text-green-600 font-medium transition"
               >
                 Features
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/technology"
+                prefetch={true}
                 className="text-gray-500 hover:text-green-600 font-medium transition"
               >
                 Technology
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="/about"
+                prefetch={true}
                 className="text-gray-500 hover:text-green-600 font-medium transition"
               >
                 About
-              </a>
+              </Link>
             </nav>
 
             {/* CTA Button */}
@@ -116,24 +119,24 @@ const HomePage = () => {
         {/* Mobile Menu - Shown when checkbox is checked */}
         <div className="hidden peer-checked:block md:hidden bg-white border-t border-gray-100 animate-in slide-in-from-top-2 duration-200">
           <div className="px-4 pt-2 pb-4 space-y-1">
-            <a
-              href="#"
+            <Link
+              href="/features"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50"
             >
               Features
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/technology"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50"
             >
               Technology
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/about"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50"
             >
               About
-            </a>
+            </Link>
             <div className="pt-4">
               <Link
                 href="/sign-up"

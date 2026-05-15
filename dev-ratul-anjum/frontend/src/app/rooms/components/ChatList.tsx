@@ -87,9 +87,9 @@ const ChatList = () => {
               <SquarePen className="h-5 w-5" />
             </Link>
           </button>
-          <button>
+          {/* <button>
             <EllipsisVertical className="h-5 w-5" />
-          </button>
+          </button> */}
         </div>
       </header>
 
@@ -119,7 +119,7 @@ const ChatList = () => {
           <button className="whitespace-nowrap rounded-full bg-[#00a884]/10 px-3 py-1 text-xs font-medium text-[#00a884]">
             All
           </button>
-          <button className="whitespace-nowrap rounded-full bg-[#f0f2f5] px-3 py-1 text-xs font-medium text-[#667781] hover:bg-gray-200">
+          {/* <button className="whitespace-nowrap rounded-full bg-[#f0f2f5] px-3 py-1 text-xs font-medium text-[#667781] hover:bg-gray-200">
             Unread
           </button>
           <button className="whitespace-nowrap rounded-full bg-[#f0f2f5] px-3 py-1 text-xs font-medium text-[#667781] hover:bg-gray-200">
@@ -127,7 +127,7 @@ const ChatList = () => {
           </button>
           <button className="whitespace-nowrap rounded-full bg-[#f0f2f5] px-3 py-1 text-xs font-medium text-[#667781] hover:bg-gray-200">
             Groups
-          </button>
+          </button> */}
         </div>
       )}
 

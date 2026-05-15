@@ -31,7 +31,7 @@ const NavigationRail = () => {
           <MessageSquareText className="h-6 w-6" />
         </Link>
 
-        <Link
+        {/* <Link
           href="/calls"
           className="flex h-10 w-10 items-center justify-center rounded-full text-[#54656f] transition hover:bg-gray-200"
         >
@@ -43,7 +43,7 @@ const NavigationRail = () => {
           className="flex h-10 w-10 items-center justify-center rounded-full text-[#54656f] transition hover:bg-gray-200"
         >
           <CircleDashed className="h-6 w-6" />
-        </Link>
+        </Link> */}
       </div>
 
       {/* Bottom Icons (Right side on Mobile) */}

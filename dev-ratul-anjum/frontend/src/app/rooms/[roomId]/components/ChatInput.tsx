@@ -36,6 +36,7 @@ const ChatInput = ({
 
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const typingTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const handleAddMessage = async () => {
     setLoading(true);
@@ -137,6 +138,16 @@ const ChatInput = ({
   };
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const el = e.target;
+
+    // reset height first (important)
+    el.style.height = "auto";
+
+    // set new height based on content
+    el.style.height = el.scrollHeight + "px";
+
+    setMessage(el.value);
+
     if (!isTyping) socket?.emit("start-typing", conversationId);
 
     if (typingTimeout.current) clearTimeout(typingTimeout.current);
@@ -252,16 +263,17 @@ const ChatInput = ({
             />
 
             <div className="flex flex-1 items-center gap-2 rounded-lg bg-white px-4 py-2 shadow-sm">
-              <button className="text-[#54656f]">
+              {/* <button className="text-[#54656f]">
                 <Smile className="h-5 w-5" />
-              </button>
+              </button> */}
 
               <textarea
+                ref={textareaRef}
                 value={message}
                 onChange={(e) => handleTextChange(e)}
                 placeholder="Type a message"
                 rows={1}
-                className="max-h-25 min-h-6 h-auto flex-1 resize-none border-none bg-transparent py-1 text-sm outline-none placeholder-[#667781] custom-scrollbar leading-6"
+                className="max-h-50 min-h-6 h-auto flex-1 resize-none border-none bg-transparent py-1 text-sm outline-none placeholder-[#667781] custom-scrollbar leading-6"
               ></textarea>
             </div>
             {(message.trim() ||

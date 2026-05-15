@@ -38,16 +38,16 @@ const Settings = () => {
       <header className="flex h-15 items-center px-4 bg-white border-b border-[#d1d7db]">
         <h1 className="text-xl font-bold">Settings</h1>
       </header>
-      <div className="p-3 bg-white">
-        <div className="flex h-9 items-center rounded-lg bg-[#f0f2f5] px-3 focus-within:ring-1 ring-[#00a884]">
+      {/* <div className="p-3 bg-white"> */}
+      {/* <div className="flex h-9 items-center rounded-lg bg-[#f0f2f5] px-3 focus-within:ring-1 ring-[#00a884]">
           <Search className="h-5 w-5 text-[#54656f]" />
           <input
             type="text"
             placeholder="Search settings"
             className="ml-4 w-full bg-transparent outline-none text-sm"
           />
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
       <div className="flex-1 overflow-y-auto custom-scrollbar bg-white">
         <div className="flex items-center gap-4 px-4 py-3 hover:bg-[#f5f6f6] cursor-pointer">
           {profile?.image ? (

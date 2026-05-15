@@ -204,7 +204,7 @@ const ChatArea = ({ conversationId }: { conversationId: string }) => {
               </div>
             </div>
             <div className="flex items-center gap-5 text-[#54656f]">
-              <button>
+              {/* <button>
                 <Phone className="h-4 w-4" />
               </button>
 
@@ -213,7 +213,7 @@ const ChatArea = ({ conversationId }: { conversationId: string }) => {
               </button>
               <button>
                 <Search className="h-5 w-5" />
-              </button>
+              </button> */}
               <button
                 onClick={() => setActiveSidebarTab("contactInfo")}
                 className="cursor-pointer"

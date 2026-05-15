@@ -13,6 +13,7 @@ import {
   Eye,
 } from "lucide-react";
 import signupAction, { FormState } from "@/actions/signupAction";
+import GuestLoginButton from "./GuestLoginButton";
 
 const initialState: FormState = {
   values: {
@@ -256,6 +257,7 @@ const SignupForm = () => {
           "Create Account"
         )}
       </button>
+      <GuestLoginButton />
     </Form>
   );
 };

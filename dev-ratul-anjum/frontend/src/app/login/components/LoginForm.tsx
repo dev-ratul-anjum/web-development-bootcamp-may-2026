@@ -2,9 +2,10 @@
 
 import Form from "next/form";
 import { useState, useActionState } from "react";
-import { Mail, Lock, Loader2, EyeOff, Eye } from "lucide-react";
+import { Mail, Lock, EyeOff, Eye } from "lucide-react";
 import { FormState } from "@/actions/signinAtion";
 import signinAction from "@/actions/signinAtion";
+import AuthSubmitButton from "./AuthSubmitButton";
 
 const initialState: FormState = {
   values: {
@@ -21,6 +22,9 @@ const LoginForm = () => {
   );
 
   const [showPassword, setShowPassword] = useState(false);
+  const [activeSubmitButton, setActiveSubmitButton] = useState<
+    "login" | "guest" | null
+  >(null);
 
   return (
     <Form className="space-y-4" action={formAction}>
@@ -94,23 +98,19 @@ const LoginForm = () => {
         <p className="text-red-500 text-xs mt-1 ml-1">{state.errors.general}</p>
       )}
 
-      {/* Submit Button */}
-      <button
-        type="submit"
-        disabled={isPending}
-        className={`w-full bg-slate-900 hover:bg-black text-white font-medium py-2.5 rounded-lg transition-all shadow-lg shadow-slate-900/10 mt-2 flex items-center justify-center ${
-          isPending ? "opacity-70 cursor-not-allowed" : "cursor-pointer"
-        }`}
-      >
-        {isPending ? (
-          <>
-            <Loader2 className="animate-spin mr-2 h-5 w-5" />
-            Logging in...
-          </>
-        ) : (
-          "Login"
-        )}
-      </button>
+      <AuthSubmitButton
+        type="login"
+        active={activeSubmitButton}
+        setActive={setActiveSubmitButton}
+        isPending={isPending}
+      />
+
+      <AuthSubmitButton
+        type="guest"
+        active={activeSubmitButton}
+        setActive={setActiveSubmitButton}
+        isPending={isPending}
+      />
     </Form>
   );
 };

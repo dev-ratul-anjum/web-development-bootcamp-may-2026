@@ -54,6 +54,7 @@ const SignupPage = () => {
               Already have an account?{" "}
               <Link
                 href="/login"
+                prefetch={true}
                 className="font-medium text-slate-900 underline hover:text-black"
               >
                 Sign in

@@ -3,15 +3,24 @@ import { signinSchema } from "@/schema/signinSchema";
 import { redirect } from "next/navigation";
 
 const signinAction = async (prevState: FormState, formData: FormData) => {
+  const isGuest = formData.get("guest") === "true";
+
   const rowData = {
     email: String(formData.get("email") || ""),
     password: String(formData.get("password") || ""),
   };
 
+  if (isGuest) {
+    rowData.email = "guest@gmail.com";
+    rowData.password = "guest1aA@";
+  }
+
   const values = {
     email: rowData.email,
     password: rowData.password,
   };
+
+  console.log(values);
 
   // Zod validation
   const parsed = signinSchema.safeParse(rowData);

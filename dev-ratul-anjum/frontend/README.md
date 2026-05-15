@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend – Dialog Application
 
-## Getting Started
+**Tech Stack:** **Next.js**, **React**, **TypeScript**, **Tailwind CSS**, **Lucide‑React**, **React Query**, **Socket.IO‑client**, **Better‑Auth**, **Zod**.
 
-First, run the development server:
+---
+
+## 📦 Prerequisites
+
+- **Node.js** (v20 or later) – includes npm or yarn.
+- **Git** – to clone the repository.
+
+---
+
+## 🚀 Quick Start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Clone the repo (if you haven't already)
+git clone https://github.com/dev-ratul-anjum/web-development-bootcamp-may-2026.git
+cd web-development-bootcamp-may-2026/dev-ratul-anjum/frontend
+
+# Install dependencies (using your preferred package manager)
+# npm
+npm install
+# or yarn
+# yarn install
+# or pnpm
+# pnpm install
+
+# Create a .env file based on .env.example
+cp .env.example .env
+# Populate the variables – at minimum:
+# NEXT_PUBLIC_BACKEND_BASE_URL=<backend URL>
+# NEXT_PUBLIC_FRONTEND_OAUTH_SUCCESS_REDIRECT_URL=<your‑frontend URL>
+
+# Run the development server
+npm run dev   # or yarn dev, pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Available Scripts
 
-## Learn More
+| Script     | Description                                       |
+| ---------- | ------------------------------------------------- |
+| `dev`      | Starts the Next.js dev server with hot‑reloading. |
+| `build`    | Creates an optimized production build.            |
+| `start`    | Serves the production build (run after `build`).  |
+| `lint`     | Runs ESLint across the codebase.                  |
+| `lint:fix` | Auto‑fixes lintable issues.                       |
+| `format`   | Formats files with Prettier.                      |
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Variable                                          | Purpose                                                  |
+| ------------------------------------------------- | -------------------------------------------------------- |
+| `NEXT_PUBLIC_BACKEND_BASE_URL`                    | URL of the backend API (e.g., `https://api.fabaka.com`). |
+| `NEXT_PUBLIC_FRONTEND_OAUTH_SUCCESS_REDIRECT_URL` | Frontend redirect after successful social login.         |
+| `NEXT_PUBLIC_SITE_URL`                            | Used for Open Graph meta tags.                           |
 
-## Deploy on Vercel
+Add any additional variables required by **Better‑Auth** (client IDs/secrets) – they are prefixed with `NEXT_PUBLIC_` to expose them to the browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Project Structure (high‑level)
+
+```
+frontend/
+├─ src/
+│  ├─ app/               # Next.js App Router – pages are inside folders
+│  │   ├─ about/          # Static About page (implemented)
+│  │   ├─ features/       # Static Features page (implemented)
+│  │   ├─ technology/     # Static Technology page (implemented)
+│  │   └─ ...
+│  ├─ components/        # Re‑usable UI components (buttons, cards, etc.)
+│  ├─ hooks/             # Custom React hooks (e.g., authentication, socket)
+│  ├─ lib/               # Utility functions, API clients
+│  └─ providers/         # Context providers (React Query, Auth)
+├─ public/               # Static assets (icons, images)
+├─ styles/               # Global CSS (Tailwind config lives at root)
+└─ ...
+```
+
+---
+
+## 🧪 Testing
+
+The project currently does **not** include automated tests. Add Jest or React Testing Library as needed.
+
+---
+
+## 📦 Production Build & Deployment
+
+1. Build the app:
+   ```bash
+   npm run build   # or yarn build
+   ```
+2. The output lives in the `.next` folder. Deploy to Vercel, Netlify, or any Node.js‑compatible host.
+3. Ensure the environment variables are set on the hosting platform.
+
+---
+
+## 📚 Helpful Resources
+
+- **Next.js Documentation** – https://nextjs.org/docs
+- **Tailwind CSS** – https://tailwindcss.com
+- **Better‑Auth** – https://github.com/nextauthjs/better-auth
+- **Socket.IO client** – https://socket.io/docs/v4/client-api/
+
+---
+
+Feel free to reach out if you encounter any issues during setup!

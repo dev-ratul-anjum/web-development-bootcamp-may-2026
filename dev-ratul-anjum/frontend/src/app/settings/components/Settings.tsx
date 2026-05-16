@@ -3,6 +3,7 @@
 import ConfirmationModal from "@/components/ConfirmationModal";
 import useProfileDetails from "@/hooks/useProfileDetails";
 import { authClient } from "@/lib/auth-client";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   Bell,
   HelpCircle,
@@ -17,18 +18,28 @@ import {
   Video,
 } from "lucide-react";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Settings = () => {
   const { data: profile, isLoading } = useProfileDetails();
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState<boolean>(false);
 
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const handleLogout = async () => {
     await authClient.signOut({
       fetchOptions: {
-        onSuccess: () => {
-          redirect("/login"); // redirect to login page
+        onSuccess: async () => {
+          // clear all react-query cache
+          queryClient.clear();
+
+          // redirect
+          router.replace("/login");
+
+          // refresh app router state
+          router.refresh();
         },
       },
     });

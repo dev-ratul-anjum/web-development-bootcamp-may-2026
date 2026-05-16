@@ -29,7 +29,7 @@ const UserRow = ({
         <Image
           src={item.image}
           alt="User"
-          className="rounded-full object-cover"
+          className="rounded-full w-10 h-10 object-cover"
           width={40}
           height={40}
         />
